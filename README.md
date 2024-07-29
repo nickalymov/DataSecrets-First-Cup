@@ -1,2 +1,2 @@
 # DataSecrets-First-Cup
-A machine learning solution for predicting the likelihood of promotional code usage by customers. Achieved 7th place out of 76 participants in a competition.
+Решение на основе машинного обучения для прогнозирования вероятности использования промокода покупателем. 7-е место из 76 участников конкурса.
