@@ -1,5 +1,5 @@
 # DataSecrets-First-Cup
-Machine learning solution for predicting the likelihood of a customer using a promo code. 7th place out of 76 participants in the competition. Link:[Лидерборд](https://datasecrets.ru/hackathons/7?aspect=leaderboard)
+Machine learning solution for predicting the likelihood of a customer using a promo code. 7th place out of 76 participants in the competition. Link:[Leaderboard](https://datasecrets.ru/hackathons/7?aspect=leaderboard)
 
 ## Brief description
 This project is designed to predict the likelihood of using promo codes by customers of the Dodo Pizza pizzeria service. The project uses data on orders, promotions, user activity and other features to train machine learning models based on gradient boosting and make predictions from stacking models.
