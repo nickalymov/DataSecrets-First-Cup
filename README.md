@@ -1,53 +1,53 @@
 # DataSecrets-First-Cup
-Решение на основе машинного обучения для прогнозирования вероятности использования промокода покупателем. 7-е место из 76 участников конкурса. Ссылка: [Лидерборд](https://datasecrets.ru/hackathons/7?aspect=leaderboard)
+Machine learning solution for predicting the likelihood of a customer using a promo code. 7th place out of 76 participants in the competition. Link:[Лидерборд](https://datasecrets.ru/hackathons/7?aspect=leaderboard)
 
-## Краткое описание
-Этот проект предназначен для предсказания вероятности использования промокодов клиентами сервиса пиццерии Додо Пицца. В проекте использованы данные о заказах, промоакциях, активности пользователей и другие фичи чтобы обучить модели машинного обучения на основе градиентного бустинга и сделать предсказания из стекинга моделей.
+## Brief description
+This project is designed to predict the likelihood of using promo codes by customers of the Dodo Pizza pizzeria service. The project uses data on orders, promotions, user activity and other features to train machine learning models based on gradient boosting and make predictions from stacking models.
 
-## Структура проекта
+## Project structure
 - DataSecrets-First-Cup/
 - │
-- ├── my_data/                         # Данные для обучения и тестирования
-- │   ├── my_test.csv                  # Тестовые данные с добавленными признаками
-- │   ├── my_train.csv                 # Тренировочные данные с добавленными признаками
-- ├── notebooks/                       # Jupyter Notebooks для анализа данных и разработки
-- │   ├── EDA.ipynb                    # Ноутбук для исследовательского анализа данных (Exploratory Data Analysis) данных data
-- │   ├── feature_engineering.ipynb    # Ноутбук для генерации новых признаков из данных data
-- │   ├── inference.ipynb              # Ноутбук для предсказания тестовых меток
-- ├── submit/                          # Папка для хранения результатов
-- │   ├── submit.csv                   # Результаты предсказаний для тестовых данных
-- ├── LICENSE                          # Лицензия
-- ├── README.md                        # Описание проекта (данный файл)
-- └── requirements.txt                 # Зависимости проекта
+- ├── my_data/                         # Data for training and testing
+- │   ├── my_test.csv                  # Test data with added features
+- │   ├── my_train.csv                 # Training data with added features
+- ├── notebooks/                       # Jupyter Notebooks for Data Analysis and Development
+- │   ├── EDA.ipynb                    # Exploratory Data Analysis Notebook data
+- │   ├── feature_engineering.ipynb    # Notebook for generating new features from data
+- │   ├── inference.ipynb              # Notebook for predicting test marks
+- ├── submit/                          # Folder for storing results
+- │   ├── submit.csv                   # Prediction results for test data
+- ├── LICENSE                          # License
+- ├── README.md                        # Project Description (this file)
+- └── requirements.txt                 # Project dependencies
 
-## Резюме
+## Resume
 
-### Важность создания и модификации признаков
-В этом соревновании ключевую роль сыграло создание и изменение признаков для обучающей и тестовой выборок. Я разработал 56 новых признаков, которые были добавлены к исходным данным, что значительно улучшило качество предсказаний.
+### The Importance of Feature Creation and Modification
+The key to this competition was the creation and modification of features for the training and test sets. I developed 56 new features that were added to the original data, which significantly improved the quality of predictions.
 
-### Использованные методы и модели
-Для предсказания использовалась стратегия стекинга моделей и усреднения их результатов. Были задействованы следующие модели:
+### Methods and models used
+The strategy of stacking models and averaging their results was used for prediction. The following models were used:
 
 - XGBClassifier
 - LGBMClassifier
 - CatBoostClassifier
   
-### Процесс обучения и валидации
-Директорию data можно скачать с официального сайта DataSecrets по ссылке (неободима регистрация) : https://datasecrets.ru/hackathons/7
-Обучающая выборка была разделена на две стратифицированные подвыборки для проведения валидации. На каждой подвыборке использовались все три модели, и их результаты усреднялись. Итоговое предсказание меток рассчитывалось как среднее значение всех моделей на каждой подвыборке, что обеспечило более стабильные результаты. Общая формула усреднения была следующей: 
-(∑результаты всех моделей)/(𝑛=3×число подвыборок).
+### Training and validation process
+The data directory can be downloaded from the official DataSecrets website at the link (registration required): https://datasecrets.ru/hackathons/7
+The training set was divided into two stratified subsamples for validation. All three models were used on each subsample, and their results were averaged. The final label prediction was calculated as the average of all models on each subsample, which ensured more stable results. The general averaging formula was as follows:
+(∑results of all models)/(𝑛=3×number of subsamples).
 
-Подбор параметров для каждой модели осуществлялся с помощью библиотеки optuna.
+The selection of parameters for each model was carried out using the optuna library.
 
-### Идеи, которые не оправдали ожидания
-- Использование псевдо-разметки:
-Пытался улучшить результаты, добавляя в обучение тестовые данные с метками, полученными с помощью модели, с учетом баланса меток (например, 1:33, где на один использованный промокод приходится 33 неиспользованных). Однако это не привело к значимому улучшению.
+### Ideas that didn't live up to expectations
+- Using pseudo-labeling:
+Tried to improve the results by adding test data with labels obtained by the model to the training, taking into account the balance of labels (e.g. 1:33, where for every one used promo code there are 33 unused ones). However, this did not lead to a significant improvement.
 
-- Стекинг попарно или использование одиночных моделей:
-Экспериментировал с различными комбинациями стекинга, включая попарное объединение моделей и использование отдельных моделей (XGB, LGBM, CatBoost). Однако эти методы не дали лучших результатов по сравнению с исходным стекингом всех трех моделей и их усреднением.
+- Stacking in pairs or using single models:
+Experimented with different stacking combinations, including pairwise stacking of models and using single models (XGB, LGBM, CatBoost). However, these methods did not yield better results than the original stacking of all three models and averaging them.
 
 
-Таким образом, наилучшие результаты были достигнуты за счет работы с признаками и комбинированного подхода с использованием нескольких моделей, подкрепленного оптимизацией гиперпараметров.
+Thus, the best results were achieved by working with features and a combined approach using several models, supported by hyperparameter optimization.
 
-## Лицензия
-Этот проект распространяется под лицензией MIT. Подробности см. в файле LICENSE
+## License
+This project is licensed under the MIT license. See the LICENSE file for details.
